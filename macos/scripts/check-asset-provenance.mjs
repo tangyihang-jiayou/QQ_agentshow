@@ -9,8 +9,10 @@ const provenancePath = path.join(productRoot, "references", "asset-provenance.md
 const markdown = await fs.readFile(provenancePath, "utf8");
 const entries = [];
 const repositoryOnlyAssets = new Set([
-  "../docs/images/qq-agentshow-cover.png",
+  "../docs/images/qq-agentshow-cover.jpg",
   "../docs/images/qq-agentshow-preview.png",
+  "../docs/images/qq-agentshow-features.png",
+  "../docs/images/qq-agentshow-ui-sanitized.png",
 ]);
 const inRepositoryCheckout = await fs.lstat(path.resolve(productRoot, "..", ".git"))
   .then(() => true, () => false);
@@ -22,8 +24,8 @@ for (const match of markdown.matchAll(/^- File: `([^`]+)`\n- SHA-256: `([0-9a-f]
   entries.push({ relative: match[1], expected: match[2] });
 }
 
-if (entries.length !== 18) {
-  throw new Error(`Expected 18 provenance-gated assets, found ${entries.length}`);
+if (entries.length !== 20) {
+  throw new Error(`Expected 20 provenance-gated assets, found ${entries.length}`);
 }
 
 let verified = 0;

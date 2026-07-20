@@ -360,7 +360,7 @@ STAGE_OUTPUT="$TMP/stage-output"
 [ ! -e "$STAGE_OUTPUT/.scratch" ]
 [ ! -e "$STAGE_OUTPUT/untracked-secret.txt" ]
 
-# The standalone product omits two repository README screenshots, while every
+# The standalone product omits four repository README visuals, while every
 # bundled asset must remain provenance-gated and self-verifiable.
 STANDALONE_PRODUCT="$TMP/standalone-product"
 "$ROOT/scripts/stage-product-files.sh" "$ROOT" "$STANDALONE_PRODUCT"
@@ -377,7 +377,7 @@ STANDALONE_PRODUCT="$TMP/standalone-product"
 /usr/bin/grep -F -q 'playQqNotification("confirmation"' \
   "$STANDALONE_PRODUCT/assets/renderer-inject.js"
 "$NODE" "$STANDALONE_PRODUCT/scripts/check-asset-provenance.mjs" \
-  | /usr/bin/grep -F -q '16 present asset digests match; 2 repository-only documentation assets'
+  | /usr/bin/grep -F -q '16 present asset digests match; 4 repository-only documentation assets'
 
 # A verified CDP listener must be bound only to a numeric loopback address;
 # a Codex-owned wildcard or LAN listener is still unsafe.
@@ -475,7 +475,7 @@ fi
 /usr/bin/grep -F -q 'maintainer-supplied historical QQ-era nostalgia materials' \
   "$COMPACT_ROOT/NOTICE.md"
 /usr/bin/grep -F -q '`assets/sounds/sources/`' "$COMPACT_ROOT/NOTICE.md"
-/usr/bin/grep -F -q 'is not included in this standalone archive' "$COMPACT_ROOT/NOTICE.md"
+/usr/bin/grep -F -q 'are not included in this standalone archive' "$COMPACT_ROOT/NOTICE.md"
 /bin/mkdir -p "$COMPACT_ROOT/scripts"
 /bin/cp "$ROOT/scripts/prepare-standalone-docs.sh" "$COMPACT_ROOT/scripts/"
 "$COMPACT_ROOT/scripts/prepare-standalone-docs.sh" "$COMPACT_REPACK"

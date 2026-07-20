@@ -20,7 +20,7 @@ The bitmap sprite `macos/assets/qq2007-icons.png` is generated from project-orig
 
 The notification source files are retained locally in `macos/assets/sounds/sources/` so the shipped cues can be rebuilt without a network request or system codec. `macos/scripts/generate-notification-sounds.mjs` preserves their historical timing and recognizable timbre while applying only DC removal, gentle filtering, conservative gain, and click-free fades. Both shipped cues are mono 44.1 kHz PCM WAV files. This processing does not create or imply new rights in the underlying recordings.
 
-`docs/images/qq-agentshow-cover.png` is AI-generated project artwork created for the public repository. `docs/images/qq-agentshow-preview.png` is a sanitized runtime preview included for repository documentation only; it contains application UI and must not be imported or redistributed as a theme background.
+The four files under `docs/images/qq-agentshow-*` are repository documentation visuals. `qq-agentshow-ui-sanitized.png` is a runtime capture protected with irreversible solid masks; the JPEG cover, framed preview, and feature overview are deterministic compositions rendered from that capture and the separately documented bundled preset assets by `docs/visuals/render-readme-assets.sh`. They contain application UI and historical nostalgia artwork, are not part of the install payload, and must not be imported or redistributed as theme backgrounds.
 
 ## Runtime
 

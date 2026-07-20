@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QQ_agentshow README visuals</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #173b61;
+      --muted: #52779a;
+      --line: #4f91ca;
+      --line-dark: #1764ad;
+      --panel: #eff8ff;
+      --panel-strong: #d8edfc;
+      --blue: #0f78ce;
+      --blue-dark: #0754a2;
+      --gold: #f3a619;
+      --green: #4caf27;
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      width: 1600px;
+      height: 900px;
+      margin: 0;
+      overflow: hidden;
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      color: var(--ink);
+      background: #b7dcf8;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255,255,255,.26), rgba(53,139,216,.08)),
+        url("../../macos/presets/preset-codex-1907-deep/background.jpg") center / cover no-repeat;
+      filter: saturate(.94) contrast(.98);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(35,103,166,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(35,103,166,.055) 1px, transparent 1px);
+      background-size: 4px 4px;
+      mix-blend-mode: multiply;
+      opacity: .42;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: 1600px;
+      height: 900px;
+      display: none;
+    }
+
+    body[data-view="cover"] .cover,
+    body[data-view="preview"] .preview,
+    body[data-view="features"] .features { display: block; }
+
+    .window {
+      border: 2px solid rgba(25, 101, 173, .98);
+      border-radius: 12px 12px 4px 4px;
+      background: rgba(242, 250, 255, .94);
+      box-shadow:
+        0 18px 36px rgba(20, 70, 116, .28),
+        inset 0 0 0 1px rgba(255,255,255,.9);
+      overflow: hidden;
+    }
+
+    .window-title {
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 14px 0 16px;
+      color: white;
+      font-size: 21px;
+      font-weight: 800;
+      text-shadow: 0 1px 1px #07539e;
+      border-bottom: 1px solid #0b67b6;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.58), transparent 46%),
+        linear-gradient(180deg, #45a8ed 0%, #0b7bd1 52%, #126ec0 100%);
+    }
+
+    .window-title .mini-penguin {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+      filter: drop-shadow(0 1px 1px rgba(0,0,0,.25));
+    }
+
+    .window-title .title-spacer { flex: 1; }
+
+    .window-button {
+      width: 30px;
+      height: 27px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: 4px;
+      background: linear-gradient(#8fcdf4, #227ac0);
+      box-shadow: 0 0 0 1px #1763a1, inset 0 1px 0 rgba(255,255,255,.7);
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .window-button.close { background: linear-gradient(#ff9f72, #db4b22); }
+
+    .statusbar {
+      height: 38px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 16px;
+      color: #315f88;
+      font-size: 16px;
+      border-top: 1px solid #76aada;
+      background: linear-gradient(#eaf7ff, #b9def7);
+      box-shadow: inset 0 1px 0 white;
+    }
+
+    .online-dot {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: linear-gradient(#7de641, #37a80e);
+      border: 1px solid #278b09;
+      box-shadow: 0 0 0 2px rgba(255,255,255,.75);
+    }
+
+    .cover .brand-panel {
+      position: absolute;
+      left: 64px;
+      top: 72px;
+      width: 590px;
+      height: 732px;
+      padding: 52px 48px 42px;
+      color: white;
+      border: 2px solid rgba(255,255,255,.92);
+      border-radius: 42px 10px 42px 10px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.28), transparent 22%),
+        linear-gradient(145deg, rgba(19,126,211,.97), rgba(5,73,151,.96));
+      box-shadow:
+        0 22px 40px rgba(7, 64, 125, .34),
+        inset 0 0 0 2px rgba(11,83,154,.72),
+        inset 0 0 32px rgba(255,255,255,.22);
+    }
+
+    .cover .brand-panel::before {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border: 1px dotted rgba(255,255,255,.5);
+      border-radius: 30px 4px 30px 4px;
+      pointer-events: none;
+    }
+
+    .brand-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 12px;
+      border: 1px solid rgba(255,255,255,.76);
+      border-radius: 4px;
+      background: rgba(0,49,112,.34);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 1.8px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.25);
+    }
+
+    .cover h1 {
+      margin: 28px 0 14px;
+      font-family: Arial, "PingFang SC", sans-serif;
+      font-size: 74px;
+      line-height: .98;
+      letter-spacing: -3px;
+      text-shadow: 0 4px 0 rgba(2,51,111,.55), 0 8px 22px rgba(0,26,77,.28);
+    }
+
+    .cover .subhead {
+      width: 450px;
+      margin: 0;
+      font-size: 26px;
+      line-height: 1.45;
+      font-weight: 700;
+      text-wrap: balance;
+    }
+
+    .cover .feature-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .cover .feature-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 45px;
+      padding: 8px 13px;
+      border: 1px solid rgba(255,255,255,.48);
+      border-radius: 5px;
+      background: rgba(228,245,255,.16);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.18);
+      font-size: 18px;
+      font-weight: 650;
+    }
+
+    .feature-row b {
+      color: #ffe36f;
+      font-size: 21px;
+      text-shadow: 0 1px 1px #785a00;
+    }
+
+    .cover .meta {
+      position: absolute;
+      left: 48px;
+      bottom: 36px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #dff3ff;
+    }
+
+    .cover .meta span {
+      padding: 6px 10px;
+      border: 1px solid rgba(255,255,255,.45);
+      border-radius: 4px;
+      background: rgba(4,59,127,.42);
+    }
+
+    .cover .product-window {
+      position: absolute;
+      left: 590px;
+      top: 104px;
+      width: 950px;
+      height: 650px;
+      transform: rotate(-1.25deg);
+    }
+
+    .cover .product-window .workspace {
+      height: 554px;
+      padding: 12px;
+      background: #e7f4fd;
+    }
+
+    .cover .product-window .workspace img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+      border: 1px solid #5e99ce;
+      background: white;
+    }
+
+    .cover .penguin {
+      position: absolute;
+      right: 72px;
+      bottom: 48px;
+      width: 240px;
+      height: 240px;
+      object-fit: contain;
+      filter: drop-shadow(0 18px 16px rgba(8,50,93,.35));
+      transform: rotate(2deg);
+    }
+
+    .cover .speech {
+      position: absolute;
+      right: 238px;
+      bottom: 104px;
+      width: 265px;
+      padding: 15px 18px;
+      color: #174a75;
+      border: 2px solid #438ac4;
+      border-radius: 16px 16px 4px 16px;
+      background: rgba(255,255,255,.95);
+      box-shadow: 0 9px 22px rgba(18,72,116,.22), inset 0 0 0 2px #dff1fd;
+      font-size: 18px;
+      line-height: 1.35;
+      font-weight: 800;
+      transform: rotate(-1deg);
+    }
+
+    .cover .speech::after {
+      content: "";
+      position: absolute;
+      right: -18px;
+      bottom: 11px;
+      border-width: 13px 0 0 20px;
+      border-style: solid;
+      border-color: transparent transparent transparent #438ac4;
+    }
+
+    .preview .sheet,
+    .features .sheet {
+      position: absolute;
+      inset: 34px;
+      border: 2px solid var(--line-dark);
+      background: rgba(241,249,255,.96);
+      box-shadow: 0 18px 38px rgba(18,74,120,.25), inset 0 0 0 1px white;
+      overflow: hidden;
+    }
+
+    .sheet-header {
+      height: 62px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0 20px;
+      color: white;
+      border-bottom: 2px solid #0c67b5;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.62), transparent 44%),
+        linear-gradient(180deg, #52b2ed, #0d79cf 54%, #126bbb);
+      text-shadow: 0 1px 1px #07539e;
+      font-weight: 800;
+      font-size: 22px;
+    }
+
+    .sheet-header img { width: 39px; height: 39px; object-fit: contain; }
+    .sheet-header .sheet-title { flex: 1; }
+    .sheet-header .mode { font-size: 16px; font-weight: 700; opacity: .94; }
+
+    .preview .screen-wrap {
+      position: absolute;
+      left: 23px;
+      right: 23px;
+      top: 82px;
+      bottom: 94px;
+      padding: 10px;
+      border: 1px solid #5a98cd;
+      background: #d6eaf8;
+      box-shadow: inset 0 0 0 2px white;
+    }
+
+    .preview .screen-wrap img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .preview .legend {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 20px;
+      height: 54px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .preview .legend div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      color: #214d76;
+      border: 1px solid #76a8d2;
+      background: linear-gradient(#fff, #dff1fc);
+      box-shadow: inset 0 1px 0 #fff;
+      font-size: 16px;
+      font-weight: 750;
+    }
+
+    .legend strong { color: #0a75c8; font-size: 19px; }
+
+    .features .content {
+      height: calc(100% - 100px);
+      padding: 22px 25px 25px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr 1fr 1fr;
+      gap: 16px;
+      background:
+        linear-gradient(rgba(255,255,255,.54), rgba(218,240,254,.74)),
+        repeating-linear-gradient(0deg, transparent, transparent 23px, rgba(51,118,180,.07) 24px);
+    }
+
+    .feature-card {
+      position: relative;
+      min-width: 0;
+      border: 1px solid #5c96c8;
+      background: rgba(255,255,255,.9);
+      box-shadow: inset 0 0 0 2px #e4f3fd, 0 6px 14px rgba(29,82,126,.12);
+      overflow: hidden;
+    }
+
+    .feature-card h2 {
+      height: 52px;
+      margin: 0;
+      padding: 12px 15px;
+      color: #234f79;
+      border-bottom: 1px solid #6fa4d0;
+      background: linear-gradient(#f8fdff, #cce8fa);
+      box-shadow: inset 0 1px 0 white;
+      font-size: 21px;
+    }
+
+    .feature-card .body {
+      height: calc(100% - 52px);
+      padding: 18px;
+    }
+
+    .feature-card p {
+      margin: 12px 0 0;
+      color: #4a6f91;
+      font-size: 17px;
+      line-height: 1.6;
+      font-weight: 600;
+    }
+
+    .real-data .mini-ui {
+      height: 383px;
+      border: 1px solid #6c9bc3;
+      background: #eaf6fe;
+      overflow: hidden;
+    }
+
+    .real-data .mini-ui img {
+      width: 760px;
+      height: 446px;
+      object-fit: cover;
+      object-position: right top;
+      transform: translateX(-355px);
+    }
+
+    .real-data .proof {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .real-data .proof span {
+      padding: 8px;
+      text-align: center;
+      border: 1px solid #91badb;
+      background: #f5fbff;
+      color: #315f86;
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .pet-card .body { text-align: center; }
+
+    .pet-card .pet {
+      width: 270px;
+      height: 270px;
+      margin: 4px auto 8px;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 8px rgba(42,89,129,.25));
+    }
+
+    .motion-tags,
+    .show-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 7px;
+    }
+
+    .motion-tags span,
+    .show-tags span {
+      padding: 7px 9px;
+      color: #18588e;
+      border: 1px solid #6fa8d5;
+      border-radius: 3px;
+      background: linear-gradient(#fff, #dcedfa);
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .sound-card .sound-stage {
+      height: 206px;
+      padding: 18px 15px;
+      border: 1px solid #7ba8cd;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.8), rgba(219,240,253,.95)),
+        repeating-linear-gradient(90deg, transparent, transparent 11px, rgba(36,112,178,.12) 12px);
+    }
+
+    .sound-line {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .sound-button {
+      height: 42px;
+      display: grid;
+      place-items: center;
+      color: white;
+      border: 1px solid #1666a9;
+      border-radius: 4px;
+      background: linear-gradient(#5cb5ec, #0a78cb);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.78), 0 1px 0 #fff;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .wave {
+      height: 42px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .wave i {
+      width: 6px;
+      height: var(--h);
+      display: block;
+      border-radius: 2px;
+      background: linear-gradient(#66c8ef, #0d71be);
+      box-shadow: 0 0 0 1px rgba(20,103,169,.12);
+    }
+
+    .sound-note {
+      margin-top: 14px;
+      padding: 12px 13px;
+      color: #416a8d;
+      border: 1px solid #a2c2dc;
+      background: #f6fbff;
+      font-size: 15px;
+      line-height: 1.5;
+      font-weight: 650;
+    }
+
+    .show-card .duo {
+      height: 362px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 0;
+      border: 1px solid #78a9d0;
+      background:
+        radial-gradient(circle at 50% 34%, rgba(255,255,255,.96), rgba(207,233,250,.72) 68%),
+        linear-gradient(#eaf8ff, #b8dcf5);
+      overflow: hidden;
+    }
+
+    .show-card .duo img {
+      width: 155px;
+      height: 350px;
+      object-fit: contain;
+      object-position: center bottom;
+      filter: drop-shadow(0 7px 4px rgba(36,84,123,.16));
+    }
+
+    .features .bottom-icons {
+      position: absolute;
+      left: 50%;
+      bottom: 13px;
+      transform: translateX(-50%);
+      width: 720px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      color: #2f5d84;
+      border: 1px solid #6fa5d2;
+      border-radius: 4px;
+      background: linear-gradient(#f9fdff, #cce8fa);
+      box-shadow: inset 0 1px 0 #fff;
+      font-size: 15px;
+      font-weight: 750;
+    }
+
+    .features .bottom-icons img {
+      width: 540px;
+      height: 36px;
+      object-fit: fill;
+      image-rendering: pixelated;
+    }
+  </style>
+</head>
+<body>
+  <main class="page cover">
+    <section class="brand-panel">
+      <div class="brand-kicker"><span class="online-dot"></span> CODEX · QQ 2007</div>
+      <h1>QQ_<br>agentshow</h1>
+      <p class="subhead">把 Codex 变成会动、会提醒、能真实工作的 QQ2007 Agent 工作台。</p>
+      <div class="feature-list">
+        <div class="feature-row"><b>●</b> 真实任务、状态、产物与最近对话</div>
+        <div class="feature-row"><b>♪</b> 完成与人工确认，两种本地提示音</div>
+        <div class="feature-row"><b>★</b> 动态企鹅、经典 QQ 秀、多图画廊</div>
+      </div>
+      <div class="meta"><span>macOS</span><span>local-first</span><span>可恢复</span></div>
+    </section>
+
+    <section class="window product-window">
+      <div class="window-title">
+        <img class="mini-penguin" src="../../macos/presets/preset-codex-1907-deep/assistant.png" alt="">
+        <span>Codex 2007 · Agent 工作台</span>
+        <span class="title-spacer"></span>
+        <span class="window-button">—</span>
+        <span class="window-button">□</span>
+        <span class="window-button close">×</span>
+      </div>
+      <div class="workspace">
+        <img src="../images/qq-agentshow-ui-sanitized.png" alt="QQ_agentshow 脱敏实机界面">
+      </div>
+      <div class="statusbar"><span class="online-dot"></span><b>Codex 江湖传说</b><span>● 在线</span><span>不要迷恋哥，哥只是个传说。</span></div>
+    </section>
+
+    <div class="speech">任务完成了。<br>企鹅会庆祝，也会提醒你。</div>
+    <img class="penguin" src="../../macos/presets/preset-codex-1907-deep/assistant.png" alt="QQ_agentshow 小企鹅">
+  </main>
+
+  <main class="page preview">
+    <section class="sheet">
+      <div class="sheet-header">
+        <img src="../../macos/presets/preset-codex-1907-deep/assistant.png" alt="">
+        <span class="sheet-title">QQ_agentshow · 脱敏实机界面</span>
+        <span class="mode">真实 Codex / masked 演示模式</span>
+        <span class="window-button">—</span>
+        <span class="window-button close">×</span>
+      </div>
+      <div class="screen-wrap"><img src="../images/qq-agentshow-ui-sanitized.png" alt="真实 Codex 脱敏截图"></div>
+      <div class="legend">
+        <div><strong>01</strong> 原生输入框与多图</div>
+        <div><strong>02</strong> 真实 Agent 信息右栏</div>
+        <div><strong>03</strong> 动态企鹅与 QQ 等级</div>
+        <div><strong>04</strong> 经典男女 QQ 秀</div>
+      </div>
+    </section>
+  </main>
+
+  <main class="page features">
+    <section class="sheet">
+      <div class="sheet-header">
+        <img src="../../macos/presets/preset-codex-1907-deep/assistant.png" alt="">
+        <span class="sheet-title">QQ_agentshow · 不是贴图，是能真实工作的 Agent 工作台</span>
+        <span class="mode">本地 · 可配置 · 可恢复</span>
+        <span class="window-button">—</span>
+        <span class="window-button close">×</span>
+      </div>
+      <div class="content">
+        <article class="feature-card real-data">
+          <h2>真实信息，不编好友</h2>
+          <div class="body">
+            <div class="mini-ui"><img src="../images/qq-agentshow-ui-sanitized.png" alt="真实信息右栏"></div>
+            <div class="proof"><span>当前任务</span><span>运行状态</span><span>最近产物</span><span>来源数量</span></div>
+            <p>右栏只读当前本地 Codex 界面；公开演示可切换为 masked 或 off。</p>
+          </div>
+        </article>
+
+        <article class="feature-card pet-card">
+          <h2>会动的小企鹅</h2>
+          <div class="body">
+            <img class="pet" src="../../macos/presets/preset-codex-1907-deep/assistant.png" alt="透明背景小企鹅">
+            <div class="motion-tags"><span>呼吸</span><span>点头</span><span>挥手</span><span>敲击</span><span>跳跃</span><span>庆祝</span></div>
+            <p>支持 calm / playful / off，并尊重 macOS“减少动态效果”。</p>
+          </div>
+        </article>
+
+        <article class="feature-card sound-card">
+          <h2>完成声 + 确认声</h2>
+          <div class="body">
+            <div class="sound-stage">
+              <div class="sound-line">
+                <div class="sound-button">完成声</div>
+                <div class="wave">
+                  <i style="--h:10px"></i><i style="--h:18px"></i><i style="--h:28px"></i><i style="--h:40px"></i><i style="--h:24px"></i><i style="--h:14px"></i><i style="--h:32px"></i><i style="--h:20px"></i><i style="--h:8px"></i><i style="--h:16px"></i><i style="--h:6px"></i>
+                </div>
+              </div>
+              <div class="sound-line">
+                <div class="sound-button">确认声</div>
+                <div class="wave">
+                  <i style="--h:6px"></i><i style="--h:13px"></i><i style="--h:34px"></i><i style="--h:18px"></i><i style="--h:40px"></i><i style="--h:26px"></i><i style="--h:12px"></i><i style="--h:30px"></i><i style="--h:18px"></i><i style="--h:9px"></i><i style="--h:5px"></i>
+                </div>
+              </div>
+            </div>
+            <div class="sound-note">主 Agent 完成时响一次；第一次出现允许、确认或继续操作时响一次。后台窗口不会乱响。</div>
+            <p>两段发布 WAV 均已下混为 44.1 kHz 单声道 PCM，并保留本地试听开关。</p>
+          </div>
+        </article>
+
+        <article class="feature-card show-card">
+          <h2>经典男女 QQ 秀</h2>
+          <div class="body">
+            <div class="duo">
+              <img src="../../macos/presets/preset-codex-1907-deep/qq-show-classic-girl.png" alt="经典女 QQ 秀">
+              <img src="../../macos/presets/preset-codex-1907-deep/qq-show-classic-boy.png" alt="经典男 QQ 秀">
+            </div>
+            <div class="show-tags"><span>女</span><span>男</span><span>可换自己的</span></div>
+            <p>公开默认只保留两个经典模板；个人图片仅保存在本机，不进入仓库。</p>
+          </div>
+        </article>
+      </div>
+      <div class="bottom-icons">
+        <span>QQ2007 工具栏</span>
+        <img src="../../macos/assets/qq2007-icons.png" alt="QQ2007 图标条">
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const view = new URLSearchParams(location.search).get("view") || "cover";
+    document.body.dataset.view = ["cover", "preview", "features"].includes(view) ? view : "cover";
+    document.body.id = "ready";
+  </script>
+</body>
+</html>
