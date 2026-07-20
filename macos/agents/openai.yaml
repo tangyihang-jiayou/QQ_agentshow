@@ -1,0 +1,4 @@
+interface:
+  display_name: "QQ_agentshow"
+  short_description: "Install and configure a QQ2007-style Codex Agent Show"
+  default_prompt: "Use $QQ_agentshow to install, configure, verify, or safely restore my local macOS Codex Agent Show. Keep all native Codex interactions and use only real local data."

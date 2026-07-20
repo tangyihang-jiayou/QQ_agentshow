@@ -1,0 +1,16 @@
+{
+  "name": "qq-agentshow",
+  "version": "2.1.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "./tests/run-tests.sh",
+    "doctor": "./scripts/doctor-macos.sh",
+    "privacy": "node ./scripts/check-public-privacy.mjs",
+    "assets:check": "node ./scripts/check-asset-provenance.mjs",
+    "skill:check": "node ./scripts/verify-skill.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
