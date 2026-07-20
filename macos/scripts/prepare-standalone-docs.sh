@@ -65,7 +65,7 @@ else
       -e 's#`macos/presets/#`presets/#g' \
       -e 's#`macos/assets/#`assets/#g' \
       -e 's#`macos/scripts/#`scripts/#g' \
-      -e 's#`docs/images/qq-agentshow-preview.png` is a sanitized runtime preview included for repository documentation only#`docs/images/qq-agentshow-preview.png` is a repository-only sanitized runtime preview and is not included in this standalone archive#' \
+      -e 's#The four files under `docs/images/qq-agentshow-\*` are repository documentation visuals\.#The four `docs/images/qq-agentshow-*` repository documentation visuals are not included in this standalone archive.#' \
       "$NOTICE_TARGET" > "$temporary"
     /bin/mv "$temporary" "$NOTICE_TARGET"
 
@@ -78,7 +78,7 @@ else
       printf 'Standalone installation guide does not expose the local readiness check.\n' >&2
       exit 1
     }
-    /usr/bin/grep -F -q 'is not included in this standalone archive' "$NOTICE_TARGET" || {
+    /usr/bin/grep -F -q 'are not included in this standalone archive' "$NOTICE_TARGET" || {
       printf 'Standalone NOTICE does not identify the repository-only preview.\n' >&2
       exit 1
     }
