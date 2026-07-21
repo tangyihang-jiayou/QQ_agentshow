@@ -129,8 +129,8 @@
 | 安装审查 Agent | 最终候选的首次安装、更新、配置保留、失败恢复、Skill 入口和独立包均完成复验，没有 P0 / P1 / P2 阻断项 | 通过 |
 | 安全审查 Agent | 清洁公共历史、安装器固定 tag / SHA-256、回环 CDP 边界、隐私扫描、素材权利说明与发行包完成复验，没有 P0 / P1 / P2 阻断项 | 通过 |
 | 产品审查 Agent | 真实多图闭环、输入滚动、企鹅动作、男女 QQ 秀、双提示音、右栏三模板与 responsive matrix 完成复验，没有 P0 / P1 / P2 阻断项 | 通过 |
-| GitHub PR / CI | `v2.1.2` GitHub checks 待最终发布提交完成后回填；本地同等检查已通过 | 待回填 |
-| GitHub Release / tag | 公开正式 Release `v2.1.2` 待 tag 与 GitHub Release 创建后回填 | 待回填 |
+| GitHub PR / CI | `static-checks` 在发布 PR `#3` 通过；GitHub Actions run `29818068118` / job `88593974080`。合并提交 `90e2837` 已进入 `main` | 通过 |
+| GitHub Release / tag | 公开正式 Release `v2.1.2` 于 2026-07-21 发布，非草稿、非预发布；tag 指向 `main`，发布 ZIP 与 `SHA256SUMS.txt` 均可下载，远程 ZIP SHA-256 与根安装器固定值一致 | 通过 |
 
 ## 10. 发布完成定义
 
