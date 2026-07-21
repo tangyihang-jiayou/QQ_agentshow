@@ -370,16 +370,20 @@ assert.match(template, /markHomeComposerLayout\(composer\)/,
   "Home composer styling must mark the native context, suggestions, and composer regions.");
 assert.match(template, /qq2007HomeLayout\s*=\s*"native-flow"[\s\S]{0,320}qq2007HomeRegion\s*=\s*"context"[\s\S]{0,240}qq2007HomeRegion\s*=\s*"suggestions"[\s\S]{0,240}qq2007HomeRegion\s*=\s*"composer"/,
   "Home composer markers must preserve the native composer, context, and suggestions regions.");
-assert.match(css, /data-qq2007-home-layout="native-flow"[\s\S]{0,260}grid-template-rows:\s*auto auto auto !important/,
-  "Home task context must use a three-row semantic layout.");
+assert.match(css, /data-qq2007-home-layout="native-flow"[\s\S]{0,360}grid-template-rows:\s*minmax\(136px,\s*1fr\) auto auto auto !important/,
+  "Home task context must use a four-row layout with a visual breathing area above the native controls.");
 assert.match(css, /data-qq2007-home-region="context"[\s\S]{0,320}position:\s*static !important/,
   "The native project and plugin context must be taken out of absolute positioning.");
-assert.match(css, /data-qq2007-home-region="context"[\s\S]{0,400}grid-row:\s*2 !important/,
-  "The native project and plugin context must remain below the composer.");
-assert.match(css, /data-qq2007-home-region="suggestions"[\s\S]{0,160}grid-row:\s*3 !important/,
-  "Starter suggestions must remain below the project and plugin context.");
-assert.match(css, /data-qq2007-home-region="composer"[\s\S]{0,160}grid-row:\s*1 !important/,
-  "The composer must remain the first home action.");
+assert.match(css, /data-qq2007-home-region="context"[\s\S]{0,400}grid-row:\s*3 !important/,
+  "The native project and plugin context must remain directly above the home composer.");
+assert.match(css, /data-qq2007-home-region="suggestions"[\s\S]{0,160}grid-row:\s*2 !important/,
+  "Starter suggestions must sit above the project and plugin context.");
+assert.match(css, /data-qq2007-home-region="composer"[\s\S]{0,160}grid-row:\s*4 !important/,
+  "The home composer must remain the bottom action, matching the native Codex mental model.");
+assert.match(css, /ds2007-app-root main\.main-surface[\s\S]{0,180}height:\s*100% !important;[\s\S]{0,120}max-height:\s*100% !important;/,
+  "Task routes must clip native main surfaces to the QQ shell cell so the sticky composer stays visible.");
+assert.match(css, /ds2007-app-root > div,[\s\S]{0,260}ds2007-app-root > div > div > div[\s\S]{0,160}height:\s*100% !important;/,
+  "Intermediate Codex flex wrappers must not expand past the QQ shell cell.");
 assert.match(css, /@media \(min-height:\s*700px\)[\s\S]{0,260}data-qq2007-home-region="context"[\s\S]{0,120}margin-top:\s*28px !important/,
   "Tall home layouts must reserve the native composer's visual overflow before project context.");
 assert.match(template, /isCollapsedRecents[\s\S]{0,520}candidate\.click\(\)/,

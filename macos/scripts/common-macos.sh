@@ -724,38 +724,39 @@ launch_injector_daemon() {
   safe_truncate_state_file "$INJECTOR_ERROR_LOG"
   /bin/launchctl remove "$INJECTOR_JOB_LABEL" >/dev/null 2>&1 || true
 
-  # Prefer a direct background process — launchctl submit is unreliable on newer macOS.
-  /usr/bin/nohup "$NODE" "$INJECTOR" --watch --port "$port" --theme-dir "$THEME_DIR" \
-    >>"$INJECTOR_LOG" 2>>"$INJECTOR_ERROR_LOG" &
-  pid="$!"
-  /bin/sleep 0.08
-  if [ -n "$pid" ] && /bin/kill -0 "$pid" 2>/dev/null; then
-    printf '%s\n' "$pid"
-    return 0
-  fi
-
-  # Fallback: launchctl submit
+  # Prefer launchctl for the long-running watcher.  A plain nohup child can
+  # survive the initial PID probe yet exit right after its parent shell goes
+  # away on some Codex/Electron launches, leaving a stale state file.
   /bin/launchctl submit -l "$INJECTOR_JOB_LABEL" -o "$INJECTOR_LOG" -e "$INJECTOR_ERROR_LOG" -- \
     "$NODE" "$INJECTOR" --watch --port "$port" --theme-dir "$THEME_DIR" >/dev/null 2>&1 || true
   /bin/launchctl kickstart -k "gui/$(/usr/bin/id -u)/$INJECTOR_JOB_LABEL" >/dev/null 2>&1 || true
   while [ "$SECONDS" -lt "$deadline" ]; do
-    pid="$(/bin/launchctl print "gui/$(/usr/bin/id -u)/$INJECTOR_JOB_LABEL" 2>/dev/null \
-      | /usr/bin/awk '/^[[:space:]]*pid = [0-9]+/{print $3; exit}')"
-    if [ -n "$pid" ] && /bin/kill -0 "$pid" 2>/dev/null; then
-      printf '%s\n' "$pid"
-      return 0
-    fi
-    # Also detect the nohup node process by command line
-    pid="$(/bin/ps -axo pid=,command= | /usr/bin/awk -v inj="$INJECTOR" -v port="$port" '
-      index($0, inj) && index($0, "--watch") && index($0, "--port " port " --theme-dir ") && !found { found=$1 }
+    pid="$(/bin/ps -axo pid=,command= | /usr/bin/awk -v node="$NODE" -v inj="$INJECTOR" -v port="$port" '
+      $2 == node && index($0, inj) && index($0, "--watch") && index($0, "--port " port " --theme-dir ") && !found { found=$1 }
       END { if (found) print found }
     ')"
     if [ -n "$pid" ] && /bin/kill -0 "$pid" 2>/dev/null; then
       printf '%s\n' "$pid"
       return 0
     fi
+    pid="$(/bin/launchctl print "gui/$(/usr/bin/id -u)/$INJECTOR_JOB_LABEL" 2>/dev/null \
+      | /usr/bin/awk '/^[[:space:]]*pid = [0-9]+/{print $3; exit}')"
+    if [ -n "$pid" ] && /bin/kill -0 "$pid" 2>/dev/null; then
+      printf '%s\n' "$pid"
+      return 0
+    fi
     /bin/sleep 0.2
   done
+
+  # Fallback: direct background process if launchctl is unavailable.
+  /usr/bin/nohup "$NODE" "$INJECTOR" --watch --port "$port" --theme-dir "$THEME_DIR" \
+    >>"$INJECTOR_LOG" 2>>"$INJECTOR_ERROR_LOG" &
+  pid="$!"
+  /bin/sleep 1
+  if [ -n "$pid" ] && /bin/kill -0 "$pid" 2>/dev/null; then
+    printf '%s\n' "$pid"
+    return 0
+  fi
   fail "The injector did not start. See $INJECTOR_ERROR_LOG and $INJECTOR_LOG"
 }
 

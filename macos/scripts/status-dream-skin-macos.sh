@@ -104,10 +104,19 @@ if [ -f "$STATE_PATH" ]; then
     SESSION="active"
   elif [ "${SESSION:-}" = "paused" ] && [ "${pid:-}" = "0" ]; then
     SESSION="paused"
-  elif [ -n "${pid:-}" ] && [ "$pid" != "0" ]; then
-    SESSION="stale"
-  elif [ -z "${SESSION:-}" ]; then
-    SESSION="unknown"
+  else
+    live_pid="$(/bin/ps -axo pid=,command= | /usr/bin/awk -v node="$saved_node" -v inj="$saved_injector" -v port="$PORT" '
+      $2 == node && index($0, inj) && index($0, "--watch") && index($0, "--port " port " --theme-dir ") && !found { found=$1 }
+      END { if (found) print found }
+    ')"
+    if [ -n "${live_pid:-}" ] && /bin/kill -0 "$live_pid" 2>/dev/null; then
+      INJECTOR_ALIVE="true"
+      SESSION="active"
+    elif [ -n "${pid:-}" ] && [ "$pid" != "0" ]; then
+      SESSION="stale"
+    elif [ -z "${SESSION:-}" ]; then
+      SESSION="unknown"
+    fi
   fi
 fi
 

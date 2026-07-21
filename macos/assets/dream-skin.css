@@ -1054,8 +1054,14 @@ html.codex-dream-skin[data-dream-art-wide="true"] main.main-surface
 html.codex-dream-skin [data-qq2007-home-layout="native-flow"] {
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) !important;
-  grid-template-rows: auto auto auto !important;
-  gap: 8px !important;
+  grid-template-rows: minmax(136px, 1fr) auto auto auto !important;
+  align-content: end !important;
+  gap: 10px !important;
+  width: min(100%, 980px) !important;
+  min-height: 100% !important;
+  margin-inline: auto !important;
+  padding: 22px 20px 24px !important;
+  box-sizing: border-box !important;
 }
 
 html.codex-dream-skin [data-qq2007-home-layout="native-flow"]
@@ -1068,21 +1074,21 @@ html.codex-dream-skin [data-qq2007-home-layout="native-flow"]
   position: static !important;
   inset: auto !important;
   z-index: 1 !important;
-  grid-row: 2 !important;
+  grid-row: 3 !important;
   min-width: 0 !important;
   margin: 0 !important;
 }
 
 html.codex-dream-skin [data-qq2007-home-layout="native-flow"]
   [data-qq2007-home-region="suggestions"] {
-  grid-row: 3 !important;
+  grid-row: 2 !important;
   order: 0 !important;
   min-width: 0 !important;
 }
 
 html.codex-dream-skin [data-qq2007-home-layout="native-flow"]
   [data-qq2007-home-region="composer"] {
-  grid-row: 1 !important;
+  grid-row: 4 !important;
   min-width: 0 !important;
 }
 
@@ -1244,7 +1250,7 @@ html.codex-dream-skin[data-dream-skin-mode="qq2007"] {
   --ds2007-friend-width: 300px;
   --ds2007-sidebar-width: clamp(250px, 24vw, 330px);
   --ds2007-title-height: 46px;
-  --ds2007-toolbar-height: 46px;
+  --ds2007-toolbar-height: 54px;
   --ds2007-status-height: 25px;
   --ds2007-title-safe-left: 82px;
   --ds2007-title-safe-right: 12px;
@@ -1357,6 +1363,8 @@ html.codex-dream-skin[data-dream-skin-mode="qq2007"] .ds2007-titlebar {
   white-space: nowrap;
   -webkit-app-region: no-drag;
   pointer-events: none;
+  position: relative;
+  z-index: 8;
 }
 
 .ds2007-title-icon { flex: 0 0 16px; }
@@ -1385,12 +1393,15 @@ html.codex-dream-skin[data-dream-skin-mode="qq2007"] .ds2007-toolbar {
   box-shadow: inset 0 1px #fff, inset 0 -1px #fff;
   pointer-events: auto;
   -webkit-app-region: no-drag;
+  position: relative;
+  z-index: 7;
+  min-height: var(--ds2007-toolbar-height);
 }
 
 .ds2007-toolbar > button {
   flex: 0 1 78px;
   min-width: 58px;
-  height: 38px;
+  height: 46px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1442,8 +1453,10 @@ html.codex-dream-skin[data-dream-skin-mode="qq2007"] .ds2007-app-root {
   max-height: 100% !important;
   display: flex !important;
   overflow: hidden !important;
-  padding: 4px 0 4px 4px;
+  padding: 6px 0 4px 4px;
   box-sizing: border-box;
+  position: relative;
+  z-index: 1;
   background-color: #c8dff4 !important;
   background-image: var(--ds2007-bottom-glow) !important;
   background-position: bottom !important;
@@ -1455,6 +1468,31 @@ html.codex-dream-skin[data-dream-skin-mode="qq2007"] .ds2007-app-root > div:firs
 html.codex-dream-skin[data-dream-skin-mode="qq2007"] .ds2007-app-root > div:first-child > div:has(> aside.app-shell-left-panel) {
   min-height: 0 !important;
   height: 100% !important;
+  max-height: 100% !important;
+}
+
+/* The QQ shell adds its own title bar, toolbar and status bar. Native Codex
+   surfaces still default to viewport-height in some task routes; if we leave
+   that alone, the sticky composer pins itself below the visible shell cell and
+   the input box effectively disappears. Keep the native main area clipped to
+   the middle QQ grid row, then let Codex's own sticky composer work normally. */
+html.codex-dream-skin[data-dream-skin-mode="qq2007"] .ds2007-app-root main.main-surface {
+  min-height: 0 !important;
+  height: 100% !important;
+  max-height: 100% !important;
+}
+
+html.codex-dream-skin[data-dream-skin-mode="qq2007"] .ds2007-app-root > div,
+html.codex-dream-skin[data-dream-skin-mode="qq2007"] .ds2007-app-root > div > div,
+html.codex-dream-skin[data-dream-skin-mode="qq2007"] .ds2007-app-root > div > div > div {
+  min-height: 0 !important;
+  height: 100% !important;
+  max-height: 100% !important;
+}
+
+html.codex-dream-skin[data-dream-skin-mode="qq2007"] .ds2007-app-root .thread-scroll-container {
+  height: 100% !important;
+  min-height: 0 !important;
   max-height: 100% !important;
 }
 
@@ -2068,12 +2106,75 @@ html.codex-dream-skin[data-dream-skin-mode="qq2007"] .composer-surface-chrome bu
 
 html.codex-dream-skin[data-dream-skin-mode="qq2007"] .dream-skin-home {
   --thread-content-max-width: min(100%, 1100px) !important;
-  background: #fff !important;
+  background: transparent !important;
 }
 html.codex-dream-skin[data-dream-skin-mode="qq2007"] .dream-skin-home > div:first-child { padding-top: 0 !important; }
 html.codex-dream-skin[data-dream-skin-mode="qq2007"] .dream-skin-home > div:first-child > div:first-child {
   flex: 0 0 auto !important;
   min-height: 0 !important;
+}
+
+html.codex-dream-skin[data-dream-skin-mode="qq2007"] main.main-surface.dream-skin-home-shell {
+  background:
+    linear-gradient(90deg, rgba(232, 249, 255, .82), rgba(232, 249, 255, .22) 48%, rgba(232, 249, 255, .58)),
+    var(--dream-skin-art) !important;
+  background-size: cover !important;
+  background-position: var(--dream-skin-art-position, center) !important;
+}
+
+html.codex-dream-skin[data-dream-skin-mode="qq2007"] main.main-surface.dream-skin-home-shell > [role="main"] {
+  background: transparent !important;
+}
+
+html.codex-dream-skin[data-dream-skin-mode="qq2007"] main.main-surface.dream-skin-home-shell
+  .dream-skin-home > div:first-child > div:first-child > div:first-child {
+  background: transparent !important;
+}
+
+html.codex-dream-skin[data-dream-skin-mode="qq2007"]
+  [data-qq2007-home-layout="native-flow"]
+  [data-qq2007-home-region="context"] {
+  border: 1px solid rgba(120, 168, 201, .62) !important;
+  border-radius: 10px 10px 0 0 !important;
+  background: linear-gradient(rgba(246, 253, 255, .82), rgba(205, 235, 248, .72)) !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .9) !important;
+  backdrop-filter: blur(6px) !important;
+}
+
+html.codex-dream-skin[data-dream-skin-mode="qq2007"]
+  [data-qq2007-home-layout="native-flow"]
+  [data-qq2007-home-region="composer"]
+  .composer-surface-chrome {
+  width: min(100%, 860px) !important;
+  margin: 0 auto !important;
+  border-radius: 0 0 12px 12px !important;
+  background:
+    linear-gradient(180deg, rgba(245, 253, 255, .82) 0, rgba(202, 232, 246, .82) 30px, rgba(255, 255, 255, .74) 31px, rgba(255, 255, 255, .82) 100%) !important;
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, .92),
+    0 12px 36px rgba(34, 91, 128, .18) !important;
+  backdrop-filter: blur(8px) saturate(1.12) !important;
+}
+
+html.codex-dream-skin[data-dream-skin-mode="qq2007"]
+  [data-qq2007-home-layout="native-flow"]
+  [data-qq2007-home-region="suggestions"] .group\/home-suggestions > div > div {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+}
+
+html.codex-dream-skin[data-dream-skin-mode="qq2007"]
+  [data-qq2007-home-layout="native-flow"]
+  [data-qq2007-home-region="suggestions"] .group\/home-suggestions button {
+  min-height: 82px !important;
+  border-color: rgba(120, 168, 201, .7) !important;
+  border-radius: 10px !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .72), rgba(207, 239, 249, .58)) !important;
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, .92),
+    0 8px 20px rgba(38, 108, 153, .13) !important;
+  backdrop-filter: blur(8px) saturate(1.08) !important;
 }
 
 html.codex-dream-skin[data-dream-skin-mode="qq2007"] main.main-surface

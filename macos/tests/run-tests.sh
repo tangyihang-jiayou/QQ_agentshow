@@ -377,7 +377,7 @@ STANDALONE_PRODUCT="$TMP/standalone-product"
 /usr/bin/grep -F -q 'playQqNotification("confirmation"' \
   "$STANDALONE_PRODUCT/assets/renderer-inject.js"
 "$NODE" "$STANDALONE_PRODUCT/scripts/check-asset-provenance.mjs" \
-  | /usr/bin/grep -F -q '16 present asset digests match; 4 repository-only documentation assets'
+  | /usr/bin/grep -F -q '16 present asset digests match; 7 repository-only documentation assets'
 
 # A verified CDP listener must be bound only to a numeric loopback address;
 # a Codex-owned wildcard or LAN listener is still unsafe.
