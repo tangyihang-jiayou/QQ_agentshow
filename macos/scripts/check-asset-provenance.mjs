@@ -13,6 +13,9 @@ const repositoryOnlyAssets = new Set([
   "../docs/images/qq-agentshow-preview.png",
   "../docs/images/qq-agentshow-features.png",
   "../docs/images/qq-agentshow-ui-sanitized.png",
+  "../docs/images/qq-agentshow-live.png",
+  "../docs/images/qq-retro-target-desktop.png",
+  "../docs/images/qq-retro-target-chat.png",
 ]);
 const inRepositoryCheckout = await fs.lstat(path.resolve(productRoot, "..", ".git"))
   .then(() => true, () => false);
@@ -24,8 +27,8 @@ for (const match of markdown.matchAll(/^- File: `([^`]+)`\n- SHA-256: `([0-9a-f]
   entries.push({ relative: match[1], expected: match[2] });
 }
 
-if (entries.length !== 20) {
-  throw new Error(`Expected 20 provenance-gated assets, found ${entries.length}`);
+if (entries.length !== 23) {
+  throw new Error(`Expected 23 provenance-gated assets, found ${entries.length}`);
 }
 
 let verified = 0;

@@ -81,7 +81,12 @@ fi
 if [ -z "$INJECTOR_PID" ]; then
   INJECTOR_PID="$(launch_injector_daemon "$PORT")"
 fi
-/bin/sleep 0.15
+/bin/sleep 0.5
+RESOLVED_INJECTOR_PID="$(/bin/ps -axo pid=,command= | /usr/bin/awk -v node="$NODE" -v inj="$INJECTOR" -v port="$PORT" '
+  $2 == node && index($0, inj) && index($0, "--watch") && index($0, "--port " port " --theme-dir ") && !found { found=$1 }
+  END { if (found) print found }
+')"
+[ -z "$RESOLVED_INJECTOR_PID" ] || INJECTOR_PID="$RESOLVED_INJECTOR_PID"
 /bin/kill -0 "$INJECTOR_PID" 2>/dev/null || fail "The injector exited during startup. See $INJECTOR_ERROR_LOG"
 INJECTOR_STARTED_AT="$(process_started_at "$INJECTOR_PID")"
 [ -n "$INJECTOR_STARTED_AT" ] || fail "Could not record the injector process start time."

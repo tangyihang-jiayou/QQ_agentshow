@@ -1,11 +1,11 @@
-<p align="center">
-  <img src="docs/images/qq-agentshow-cover.jpg" alt="QQ_agentshow：把 Codex 变成 QQ2007 Agent 工作台" width="100%">
-</p>
+# QQ_agentshow
 
-<h1 align="center">QQ_agentshow</h1>
+把 macOS 上的 Codex / ChatGPT Desktop 变成一套 QQ2006/2007 风格的 Agent 工作台：蓝色玻璃窗口、QQ 好友右栏、会动的小企鹅、QQ 秀、经典提示音，以及仍然完整可用的原生 Codex 输入框、附件、模型和权限控件。
+
+> 非官方怀旧项目。与 OpenAI、Tencent、QQ 无隶属、授权或背书关系。项目不会修改 `ChatGPT.app` / `Codex.app`、`app.asar` 或应用签名。
 
 <p align="center">
-  给 macOS Codex Desktop 装上一套会动、会提醒、能真实工作的 QQ2006 / 2007 Agent 界面。
+  <img src="docs/images/qq-agentshow-live.png" alt="QQ_agentshow 在真实 Codex 任务中的运行效果" width="100%">
 </p>
 
 <p align="center">
@@ -16,116 +16,106 @@
   <img alt="local first" src="https://img.shields.io/badge/data-local--first-f2a51a?style=flat-square">
 </p>
 
-> [!IMPORTANT]
-> 这是非官方怀旧项目，与 OpenAI、Tencent、QQ 无隶属或授权关系。它不会修改 `ChatGPT.app` / `Codex.app`、`app.asar` 或应用代码签名。
+## 它想还原什么
 
-## 这是什么
-
-QQ_agentshow 不是一张盖在 Codex 上面的 QQ 贴图，也不会编造“AI 好友”。它保留 Codex 原生任务、项目、附件、审批、模型和权限控件，同时增加一套可随时关闭的 QQ2007 工作台：
-
-- 右栏读取**当前本地 Codex** 的任务状态、最近产物、来源和最近对话。
-- 透明小企鹅会呼吸、点头、挥手、敲击、跳跃；完成任务时会庆祝。
-- 主 Agent 完成任务播放完成声；需要允许、确认或继续时播放确认声。
-- 多图上传前可逐张删除，发送后按原比例进入响应式画廊。
-- 经典男女 QQ 秀、QQ 等级、签名和三套右栏布局均可配置。
-- 所有改动都在用户目录，能暂停、换回官方界面或完整恢复。
+不是现代 UI 上贴一层蓝色滤镜，而是尽量复刻“打开 QQ 就有人在线”的感觉：顶部工具栏、好友资料卡、最近对话、个人空间、QQ 秀和底部状态栏都在，但里面显示的是你的 Codex 工作状态。
 
 <p align="center">
-  <img src="docs/images/qq-agentshow-preview.png" alt="QQ_agentshow 真实 Codex 脱敏实机界面" width="100%">
+  <img src="docs/images/qq-retro-target-desktop.png" alt="QQ2006/2007 多窗口桌面目标参考" width="49%">
+  <img src="docs/images/qq-retro-target-chat.png" alt="QQ 复古聊天窗口目标参考" width="49%">
 </p>
 
-<p align="center"><sub>真实 Codex Desktop 截图；项目名、对话和本机信息使用不可逆实色遮罩。<a href="docs/images/qq-agentshow-ui-sanitized.png">查看原始脱敏截图</a>。</sub></p>
+## 现在能做什么
+
+- 右侧“Codex 好友”只读取当前本地界面：任务状态、最近产物、来源、最近对话，不伪造好友或消息。
+- 顶部工具栏复刻 QQ 时代的按钮密度：新建任务、已安排、插件、站点、拉取请求、聊天、换肤。
+- 输入框保留 Codex 原生能力：文本、图片/文件、多图删除、模型选择、权限选择、语音和发送按钮都还是原来的。
+- 小企鹅会随机呼吸、点头、挥手、探头、踱步、跳跃；任务完成时会庆祝。
+- 主 Agent 完成任务响一次完成声；出现需要你确认/允许/继续的操作时响一次确认声。
+- QQ 秀默认提供历史感的女/男模板；也可以本地替换成自己的透明 PNG。
+- 右栏可以展开、收起、关闭，支持 `classic-chat`、`workbench`、`minimal` 三套布局。
+- 随时点“换肤”回到原生界面；完整恢复也不会动官方 App 包。
 
 ## 30 秒安装
 
-支持 macOS 上的官方 ChatGPT / Codex Desktop。第一次安装前，请先正常打开一次 Codex，再从菜单栏**完全退出**。
+要求：macOS + 官方 ChatGPT / Codex Desktop。第一次安装前，请先正常打开一次 Codex，再从菜单栏完全退出。
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/tangyihang-jiayou/QQ_agentshow/v2.1.1/install.sh)"
 ```
 
-安装完成后重新打开 Codex。顶部会出现「换肤」，右侧会出现「Codex 好友 / 环境信息」工作台。
+安装后重新打开 Codex。看到顶部“换肤”和右侧“Codex 好友 / 环境信息”，就说明它已经接管外观了。
 
-想先看清会写入哪些文件，可以使用[审阅后安装](docs/INSTALLATION.md)。安装遇到问题先看[故障排查](docs/TROUBLESHOOTING.md)。
+如果你想先审阅脚本：
 
-> [!TIP]
-> 更新 Codex 后皮肤暂时消失时，通常不需要重装应用。重新运行上面的固定版本安装命令，再打开 Codex 即可；你的昵称、签名、布局和自定义图片会保留。
+```bash
+git clone --branch v2.1.1 --depth 1 https://github.com/tangyihang-jiayou/QQ_agentshow.git
+cd QQ_agentshow
+./install.sh --check
+./install.sh --no-launch
+```
 
-## 一眼看懂主要能力
+然后手动启动：
 
-<p align="center">
-  <img src="docs/images/qq-agentshow-features.png" alt="QQ_agentshow 真实数据、动态企鹅、双提示音和经典 QQ 秀" width="100%">
-</p>
+```bash
+~/.codex/codex-dream-skin-studio/scripts/start-dream-skin-macos.sh --prompt-restart
+```
 
-| 能力 | 实际行为 |
-| --- | --- |
-| 真实 Agent 信息 | 只读当前任务、运行状态、产物、来源和最近对话；不伪造好友或数字 |
-| 多图可用 | 上传前独立预览与删除；发送后保留比例，在不同缩放下自动换列 |
-| 动态企鹅 | `calm` / `playful` / `off` 三档；尊重 macOS“减少动态效果” |
-| 完成声 | 主 Agent 从运行转为完成时响一次；企鹅同步庆祝 |
-| 确认声 | 第一次出现原生允许 / 确认 / 继续操作时响一次 |
-| 隐私演示 | 最近对话支持 `real` / `masked` / `off`，截图或直播建议使用后两种 |
-| 恢复 | 不改应用包；一条命令切回官方界面并关闭本地调试端口 |
-
-## 右栏怎么排
-
-右栏顶部始终是企鹅资料和真实最近对话，中间连续显示环境与产物，QQ 秀固定放在下方，不再留下断层。
-
-| 模板 | 内容重点 | 适合场景 |
-| --- | --- | --- |
-| `classic-chat` | 企鹅 → 最近对话 → 环境信息 → QQ 秀 | 默认，最像经典 QQ |
-| `workbench` | 压缩最近对话，为环境和产物让出空间 | 编程、长任务 |
-| `minimal` | 隐藏最近对话，保留环境与 QQ 秀 | 小屏、专注模式 |
-
-右栏可以展开、收起或关闭；小窗口会自动改为紧凑布局。
-
-## 换昵称、签名和动作
-
-下面这条命令会切到工作台布局、活泼企鹅和脱敏最近对话，同时开启完成提示音：
+## 常用配置
 
 ```bash
 ~/.codex/codex-dream-skin-studio/scripts/personalize-codex-2007-macos.sh \
-  --agent-layout workbench \
+  --agent-layout classic-chat \
   --pet-motion playful \
-  --conversation-preview masked \
+  --conversation-preview real \
   --completion-sound on
 ```
 
-昵称默认读取你自己的 Codex 资料；签名提供经典模板，也可以改成自己的。公开默认 QQ 秀只有「女 / 男」两个历史模板，不包含维护者个人入口；自定义企鹅和 QQ 秀只保存在你的电脑里。
+几个常用开关：
 
-完整选项见[配置手册](docs/CONFIGURATION.md)。
+| 选项 | 可选值 | 说明 |
+| --- | --- | --- |
+| `--agent-layout` | `classic-chat` / `workbench` / `minimal` | 右栏信息密度 |
+| `--pet-motion` | `calm` / `playful` / `off` | 小企鹅动作强度 |
+| `--conversation-preview` | `real` / `masked` / `off` | 最近对话展示方式 |
+| `--completion-sound` | `on` / `off` | 完成声和确认声 |
+| `--qq-show` | `girl` / `boy` / 本地 PNG 路径 | QQ 秀默认形象 |
+
+完整配置见 [docs/CONFIGURATION.md](docs/CONFIGURATION.md)。
 
 ## 声音什么时候响
 
 | 场景 | 行为 |
 | --- | --- |
-| 主 Agent 从运行转为完成 | 播放完成声，企鹅跳一下 |
-| 页面第一次出现允许 / 拒绝 / 确认 / 继续 / 运行 / 提交操作 | 播放确认声 |
-| 同一张确认卡继续重绘 | 不重复播放 |
+| 主 Agent 从运行变成完成 | 播放完成声，小企鹅庆祝 |
+| 第一次出现允许 / 确认 / 继续 / 运行 / 提交等人工操作 | 播放确认声 |
+| 同一张确认卡重复刷新 | 不重复播放 |
 | Codex 在后台、隐藏或窗口未聚焦 | 不播放 |
 
-底部状态栏可以分别试听或关闭两种声音。发布 WAV 为 44.1 kHz、16-bit、单声道 PCM，并经过首尾淡化、直流偏移与硬削波检查。历史声音的权利边界见 [NOTICE](NOTICE.md) 和[素材溯源](macos/references/asset-provenance.md)。
+底部状态栏有“完成声 / 确认声”试听按钮。当前默认声音来自维护者选择的历史 QQ 时代素材，并做了去直流、淡入淡出、保守降噪和削波检查，尽量保留复古味道但不再有明显电流声。
 
-## 隐私、安全与恢复
+## 隐私与安全边界
 
-- 对话预览和环境信息只从当前本地 Codex 界面读取，不上传，也不写回仓库。
-- 安装器只使用官方应用内签名有效的 Node.js，不下载额外运行时。
-- CDP 只绑定数值回环地址，并验证监听进程和目标属于官方应用；调试端口没有独立认证，不建议和不可信的本地软件同时使用。
-- 公开发布检查会扫描用户目录、邮箱、令牌、私钥形态和未登记素材；图片还要逐张人工检查像素。
-- 随时点顶部「换肤」切回原生界面；完整恢复运行：
+- 只读当前本地 Codex DOM，不上传、不采集、不写回你的聊天记录。
+- 不修改官方应用包、`app.asar`、签名、会话、API Key、Base URL 或模型配置。
+- 使用官方 App 内签名有效的 Node.js，不下载第三方运行时。
+- 本地调试端口只绑定回环地址；不用时可以恢复原生界面并关闭监听器。
+- README 主图是维护者主动提供的真实运行截图；产品本身不会自动生成或上传截图。
+
+恢复命令：
 
 ```bash
 ~/.codex/codex-dream-skin-studio/scripts/restore-dream-skin-macos.sh \
   --restore-base-theme --restart-codex
 ```
 
-更多细节见[隐私说明](docs/PRIVACY.md)、[安装说明](docs/INSTALLATION.md)和[平台支持](docs/platforms.md)。产品边界与发布门槛统一维护在[发布需求与验收标准](docs/RELEASE-REQUIREMENTS.md)。
+更多说明见 [docs/INSTALLATION.md](docs/INSTALLATION.md)、[docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)、[docs/PRIVACY.md](docs/PRIVACY.md)。
 
 ## 作为 Codex Skill 使用
 
-仓库根目录的 [SKILL.md](SKILL.md) 是正式的 `QQ_agentshow` Skill 入口。把仓库地址交给 Codex，它可以依照这份 Skill 完成预检、安装、配置、验证、排错和恢复；整个流程只引用仓库内可审阅的脚本。
+仓库根目录的 [SKILL.md](SKILL.md) 就是正式的 `QQ_agentshow` Skill。把这个仓库交给 Codex，它可以按 Skill 完成预检、安装、配置、验证、排错和恢复。
 
-## 开发与发布检查
+## 开发检查
 
 ```bash
 cd macos
@@ -135,10 +125,8 @@ npm run assets:check
 npm run skill:check
 ```
 
-README 图片可由 [`docs/visuals/render-readme-assets.sh`](docs/visuals/render-readme-assets.sh) 从真实脱敏截图与仓库内素材重新生成。
-
 ## 来源与许可
 
 本项目从 [Fei-Away/Codex-Dream-Skin](https://github.com/Fei-Away/Codex-Dream-Skin) 的 macOS 运行引擎继续开发，软件代码沿用 MIT License。
 
-默认企鹅、QQ 秀和提示音是维护者选择的历史 QQ 时代怀旧素材，并非项目原创或腾讯官方授权；它们不属于 MIT 授权范围。`Codex`、`OpenAI`、`QQ`、`Tencent` 及相关标识归各自权利人所有。详见 [NOTICE](NOTICE.md) 与[素材来源记录](macos/references/asset-provenance.md)。
+默认企鹅、QQ 秀、提示音和 README 里的复古目标图属于历史 QQ 时代怀旧素材或维护者提供素材，不属于本项目原创，也不包含在 MIT 授权范围内；本项目不声称获得 Tencent / QQ 官方许可。`Codex`、`OpenAI`、`QQ`、`Tencent` 及相关标识归各自权利人所有。详见 [NOTICE.md](NOTICE.md) 与 [macos/references/asset-provenance.md](macos/references/asset-provenance.md)。

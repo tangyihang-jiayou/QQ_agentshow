@@ -2325,6 +2325,7 @@ async function runWatch(options) {
   const stop = () => { stopping = true; };
   process.on("SIGINT", stop);
   process.on("SIGTERM", stop);
+  const keepAlive = setInterval(() => {}, 60_000);
 
   const registerEarly = async (session, payload, revision) => {
     const result = await session.send("Page.addScriptToEvaluateOnNewDocument", {
@@ -2480,6 +2481,7 @@ async function runWatch(options) {
       await new Promise((resolve) => setTimeout(resolve, pollDelay));
     }
   } finally {
+    clearInterval(keepAlive);
     if (reloadTimer) clearTimeout(reloadTimer);
     closePayloadWatchers();
     await reloadChain.catch(() => {});
