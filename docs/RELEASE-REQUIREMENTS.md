@@ -121,16 +121,16 @@
 
 | 项目 | 证据 | 状态 |
 | --- | --- | --- |
-| 目标版本 | `v2.1.1`；`VERSION`、脚本、Skill、包元数据和固定下载引用一致 | 通过 |
-| 自动化测试 | 2026-07-20：源码及全新解压独立包的 `npm test`、`npm run privacy`、`npm run skill:check`、素材哈希、声音可复现、多图与通知策略、QQ 秀选择和输入滚动策略检查全部通过 | 通过 |
-| 实机与响应式 | 官方 Codex `26.715.31925`：历史企鹅与男女 QQ 秀一次性注入通过；维护者最终提供的 `595.wav`（任务完成）与 `1710.wav`（人工确认）已替换默认声并从源码热加载，发布版最大单采样跳变分别为 0.0399/0.0363，4 kHz 以上能量比分别为 -54.28/-54.72 dB；Web Audio 试听后维护者已于 2026-07-20 确认两声均无电流声。deep-home 五档通过；含 5 张原生生成图的真实 task 在 100/125/150/矮/紧凑五档及 classic-chat/workbench/minimal 三模板 8/8 通过。另以 3 张维护者在当前任务明确提供的真实 PNG 完成“上传 → 删除中间图 → 保留其余两图 → 重新加入 → 发送”闭环；发送后 3 张均保持原始尺寸语义并使用 `object-fit: contain`，100%/125% 为双列、150% 为单列，三档均无附件重叠或文档溢出。输入滚动问题已按维护者 GIF 的条件复现：deep 皮肤停留历史消息时每次中文 IME 更新原会向底部移动；修复后连续 7 次组合更新滚动值保持不变，回到底部时仍保留 Codex 原生自动跟随。 | 通过 |
+| 目标版本 | `v2.1.2`；`VERSION`、脚本、Skill、包元数据和固定下载引用一致 | 通过 |
+| 自动化测试 | 2026-07-21：源码 `npm test`、`npm run privacy`、`npm run assets:check`、`npm run skill:check` 全部通过；公开源码 23 项素材与独立包 16 项素材溯源通过 | 通过 |
+| 实机与响应式 | 官方 Codex / ChatGPT Desktop 当前运行窗口：v2.1.2 本地热注入后 `verify-dream-skin-macos.sh` 通过；任务页 composer 从状态栏下方恢复到 QQ shell 中间区域内，`composerPass`、`sidebarPass`、`framePass`、`conversationMediaPass` 均为 true；右栏、QQ 秀和状态栏保持可见。v2.1.1 的多图、输入滚动、企鹅动作和双提示音证据继续适用。 | 通过 |
 | 陌生用户 Skill 安装 | 只读预检、Codex 运行阻断、非可执行源码安装器、HOME 恢复、重复安装/配置保留和独立包文档 fixture 通过；独立安装审查者已对 `4cd4e5e8edaf7afb0f67dce46c533307dc1cd855` 明确给出 `PASS` | 通过 |
-| 隐私与发行包 | 旧公开历史已转为只读私有归档；公开仓库从无旧 `.git` 的审计快照建立，根提交 `99a086a921e259c50a183d02c2dd6633fe40a324` 不包含旧模糊截图历史。发布树使用不可逆实色遮罩截图；公开源码 20 项素材与独立包 16 项素材溯源均通过。ZIP SHA-256 为 `61101432becfbbf76fa2c43e0e8eb2c6693cdfbe4aa82841e05e1e550272ad54`，与根安装器固定值和 GitHub Release digest 一致 | 通过 |
+| 隐私与发行包 | README 主图改为维护者主动提供的真实运行截图；产品不会自动生成或上传截图。公开树隐私扫描通过；新增 3 张 README 图均登记来源与 SHA-256。候选 ZIP SHA-256 为 `69a8c761e9a730a04e484c05184af6e3a3dcea4a4bf2df4ed4696e899d177b44`，已写入根安装器固定值 | 通过 |
 | 安装审查 Agent | 最终候选的首次安装、更新、配置保留、失败恢复、Skill 入口和独立包均完成复验，没有 P0 / P1 / P2 阻断项 | 通过 |
 | 安全审查 Agent | 清洁公共历史、安装器固定 tag / SHA-256、回环 CDP 边界、隐私扫描、素材权利说明与发行包完成复验，没有 P0 / P1 / P2 阻断项 | 通过 |
 | 产品审查 Agent | 真实多图闭环、输入滚动、企鹅动作、男女 QQ 秀、双提示音、右栏三模板与 responsive matrix 完成复验，没有 P0 / P1 / P2 阻断项 | 通过 |
-| GitHub PR / CI | `QQ_agentshow checks` 在发布提交 `99a086a921e259c50a183d02c2dd6633fe40a324` 上通过；GitHub Actions run `29751479878` | 通过 |
-| GitHub Release / tag | 公开正式 Release `v2.1.1` 于 2026-07-20 发布，非草稿、非预发布；tag 指向审查提交，发布 ZIP 与 `SHA256SUMS.txt` 均可下载 | 通过 |
+| GitHub PR / CI | `v2.1.2` GitHub checks 待最终发布提交完成后回填；本地同等检查已通过 | 待回填 |
+| GitHub Release / tag | 公开正式 Release `v2.1.2` 待 tag 与 GitHub Release 创建后回填 | 待回填 |
 
 ## 10. 发布完成定义
 
