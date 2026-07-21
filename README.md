@@ -41,7 +41,7 @@
 要求：macOS + 官方 ChatGPT / Codex Desktop。第一次安装前，请先正常打开一次 Codex，再从菜单栏完全退出。
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/tangyihang-jiayou/QQ_agentshow/v2.1.1/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/tangyihang-jiayou/QQ_agentshow/v2.1.2/install.sh)"
 ```
 
 安装后重新打开 Codex。看到顶部“换肤”和右侧“Codex 好友 / 环境信息”，就说明它已经接管外观了。
@@ -49,7 +49,7 @@
 如果你想先审阅脚本：
 
 ```bash
-git clone --branch v2.1.1 --depth 1 https://github.com/tangyihang-jiayou/QQ_agentshow.git
+git clone --branch v2.1.2 --depth 1 https://github.com/tangyihang-jiayou/QQ_agentshow.git
 cd QQ_agentshow
 ./install.sh --check
 ./install.sh --no-launch

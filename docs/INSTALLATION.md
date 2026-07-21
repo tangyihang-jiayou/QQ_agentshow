@@ -18,7 +18,7 @@
 ## 一键安装
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/tangyihang-jiayou/QQ_agentshow/v2.1.1/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/tangyihang-jiayou/QQ_agentshow/v2.1.2/install.sh)"
 ```
 
 安装器会下载公开仓库的当前正式版本，验证平台、Skill 和运行文件，将引擎安装到 `~/.codex/codex-dream-skin-studio`，备份 Codex 基础主题配置，首次安装时选择 QQ2007 预设，再启动 Codex。
@@ -26,7 +26,7 @@
 ## 先审阅再安装
 
 ```bash
-git clone --branch v2.1.1 --depth 1 https://github.com/tangyihang-jiayou/QQ_agentshow.git
+git clone --branch v2.1.2 --depth 1 https://github.com/tangyihang-jiayou/QQ_agentshow.git
 cd QQ_agentshow
 ./install.sh --check
 ./install.sh --no-launch

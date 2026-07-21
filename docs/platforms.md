@@ -1,6 +1,6 @@
 # 平台与运行模型
 
-QQ_agentshow 2.1.1 仅支持 macOS 上的官方 ChatGPT / Codex Desktop。
+QQ_agentshow 2.1.2 仅支持 macOS 上的官方 ChatGPT / Codex Desktop。
 
 ```text
 本机 QQ_agentshow

@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.1.2 — 2026-07-21
+
+- Rewrote the GitHub README around the current QQ2007 Agent Show product, using the maintainer-provided live Codex screenshot as the main showcase image and two historical QQ-era screenshots as visual target references.
+- Added provenance records and digest checks for the new README documentation images.
+- Fixed task-route composer disappearance in the QQ shell: Codex main surfaces and intermediate flex wrappers are now clipped to the shell's middle grid row, keeping the native sticky composer visible and clickable above the QQ status bar.
+- Hardened watcher startup and status detection so installed skins are less likely to appear stale or fall back to native mode after launch.
+- Updated renderer and release tests for the new home layout, shell-height guard, and expanded repository-only documentation image set.
+
 ## 2.1.1 — 2026-07-20
 
 - Replaced the two default notifications with the maintainer's final historical QQ-era selections (`595.wav` for task completion and `1710.wav` for human confirmation). The deterministic decoder now accepts their original 8/16-bit mono/stereo PCM formats, and the processed outputs add telephone-band filtering, a soft noise gate, stricter slew limiting, zero-boundary fades, install-payload checks, provenance, spectrum checks, and overlapping-playback regression coverage while preserving each cue's timing and recognizable character. Web Audio playback now also ramps the first 8ms and final 18ms at the gain node so device resampling cannot reintroduce an edge click.

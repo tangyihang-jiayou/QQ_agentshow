@@ -29,7 +29,7 @@ INJECTOR_JOB_LABEL="com.openai.codex-dream-skin-studio.injector"
 # user-configurable setting.  Allowing an environment override would let an
 # untrusted local app redefine what this project calls "official Codex".
 EXPECTED_CODEX_TEAM_ID="2DC432GLL2"
-SKIN_VERSION="2.1.1"
+SKIN_VERSION="2.1.2"
 
 fail() {
   local message="$*"
